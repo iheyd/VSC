@@ -124,11 +124,9 @@ def task6():
                 print("Ошибка: Введите натуральное число.")
                 continue
             last_digit = n % 10
-
             while n >= 10:
                 n //= 10
             first_digit = n
-
             if first_digit > last_digit:
                 print(f"Старший разряд ({first_digit}) больше младшего разряда ({last_digit}).")
             elif first_digit < last_digit:
@@ -141,24 +139,86 @@ def task6():
     print("---")
 
 def task7():
-    print("---")
-    # Реализация задания 7
-    print("Задание 7.")
-    # Здесь можно добавить код для задания 7
+    while True:
+        print("---")
+        print("Задание 7.")
+        print("Вычислить значение суммы бесконечного ряда  S = 1 + x/1! + x^2/2! + ... + x^n/n!\n" \
+              "с точностью до члена ряда, по модулю меньшего E = 10^-4,\n" \
+              "и значение функции(для проверки) f=e^x,\n" \
+              "учесть, что 1 <= x <= 2.")
+        x = input("Введите значение x (1 <= x <= 2): ")
+        try:
+            x = float(x)
+            if x < 1 or x > 2:
+                print("Ошибка: x должно быть в диапазоне от 1 до 2.")
+                continue
+            S = 0
+            n = 1
+            term = 1
+            E = 10**-4
+            while abs(term) >= E:
+                S += term
+                term = (x ** n) / math.factorial(n)
+                n += 1
+            f = math.exp(x)
+            print(f"Сумма ряда S = {S:.4f}")
+            print(f"Значение функции f(x) = e^x = {f:.4f}")
+            break
+        except ValueError:
+            print("Ошибка: Вы ввели не число! Попробуйте еще раз.")
     print("---")
 
 def task8():
-    print("---")
-    # Реализация задания 8
-    print("Задание 8.")
-    # Здесь можно добавить код для задания 8
+    while True:
+        print("---")
+        print("Задание 8.")
+        print("Вычислить значение суммы бесконечного ряда  S = 2[1/x + 1/3x^3 + 1/5x^5 +...]\n" \
+              "с заданной точностью E = 10^-5, и значение функции(для проверки)\n" \
+              "y=ln((x+1)/(x-1)), учесть, что |x| > 1.")
+        x = input("Введите значение x (|x| > 1): ")
+        try:
+            x = float(x)
+            if abs(x) <= 1:
+                print("Ошибка: |x| должно быть больше 1.")
+                continue
+            S = 0
+            n = 1
+            term = 1 / x
+            E = 10**-5
+
+            while abs(term) >= E:
+                S += term
+                n += 1
+                term = (1 / (2 * n - 1)) * (1 / (x ** (2 * n - 1)))
+            S = 2 * S
+            y = math.log((x + 1) / (x - 1))
+            print(f"Сумма ряда S = {S:.4f}")
+            print(f"Значение функции y = ln((x + 1) / (x - 1)) = {y:.4f}")
+            break
+        except ValueError:
+            print("Ошибка: Вы ввели не число! Попробуйте еще раз.")
     print("---")
 
 def task9():
-    print("---")
-    # Реализация задания 9
-    print("Задание 9.")
-    # Здесь можно добавить код для задания 9
+    while True:
+        print("---")
+        print("Задание 8.")
+        print("Для каждого из 10 значений переменной x, изменяющейся от -b до b \n" \
+              "с постоянным шагом, вычислить значение произведения \n" \
+              "P = x*(x + 0,2)(x + 0,4)...*(x + 1,8).")
+        b = input("Введите значение b: ")
+        try:
+            b = float(b)
+            step = (2 * b) / 9
+            for i in range(10):
+                x = -b + i * step
+                P = 1
+                for i in range(10):
+                    P *= (x + i * 0.2)
+                print(f"x = {x:.2f}, P = {P:.4f}")
+            break
+        except ValueError:
+            print("Ошибка: Вы ввели не число! Попробуйте еще раз.")
     print("---")
 
 def main():
